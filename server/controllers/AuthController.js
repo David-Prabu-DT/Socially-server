@@ -20,12 +20,12 @@ export const registerUser = async (req, res) => {
     const user = await newUser.save();
     const token = jwt.sign(
       { username: user.username, id: user._id },
-      process.env.JWTKEY,
+      process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
     res.status(200).json({ user, token });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(403).json({ message: error.message });
   }
 };
 
@@ -38,7 +38,7 @@ export const loginUser = async (req, res) => {
 
   try {
     const user = await UserModel.findOne({ username: username });
-    console.log('user',user)
+    console.log("user", user);
 
     if (user) {
       const validity = await bcrypt.compare(password, user.password);
@@ -48,7 +48,7 @@ export const loginUser = async (req, res) => {
       } else {
         const token = jwt.sign(
           { username: user.username, id: user._id },
-          process.env.JWTKEY,
+          process.env.JWT_KEY,
           { expiresIn: "1h" }
         );
         return res.status(200).json({ user, token });
