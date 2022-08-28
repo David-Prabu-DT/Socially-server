@@ -3,7 +3,7 @@ import { loginUser, registerUser } from "../controllers/AuthController.js";
 
 const router = express.Router();
 
-router.post("/test", async (req, res) => {
+router.get("/test", async (req, res) => {
   res.send(req + "Test Auth Route");
 });
 
