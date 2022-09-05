@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const secret = process.env.JWT_KEY;
 const authMiddleWare = async (req, res, next) => {
+  console.log(req.headers.authorization, "bearer token");
   try {
     const token = req.headers.authorization.split(" ")[1];
     console.log(token);

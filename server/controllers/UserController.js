@@ -8,6 +8,7 @@ export const getUser = async (req, res) => {
 
   try {
     const user = await UserModel.findById(id);
+    console.log("userdata",user);
     if (user) {
       const { password, ...otherDetails } = user._doc;
 
@@ -20,7 +21,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-// Get all users
+// Get all USERS
 export const getAllUsers = async (req, res) => {
   try {
     let users = await UserModel.find();
@@ -38,7 +39,7 @@ export const getAllUsers = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const id = req.params.id;
-  // console.log("Data Received", req.body)
+  console.log("Data Received", req.body);
   const { _id, currentUserAdmin, password } = req.body;
 
   if (id === _id) {
@@ -60,7 +61,7 @@ export const updateUser = async (req, res) => {
       console.log({ user, token });
       res.status(200).json({ user, token });
     } catch (error) {
-      console.log("Error agya hy");
+      console.log("Error");
       res.status(500).json(error);
     }
   } else {
